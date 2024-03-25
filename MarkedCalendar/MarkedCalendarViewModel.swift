@@ -97,7 +97,7 @@ final class MarkedCalendarViewModel: ObservableObject {
         })
     }
 
-    private func changeMonth(by increment: Int) {
+    func changeMonth(by increment: Int) {
         guard let newMonth = calendar.date(byAdding: .month, value: increment, to: displayedMonth),
               let newMonthStart = calendar.date(from: calendar.dateComponents([.year, .month], from: newMonth)) else {
             print("Failed to calculate new month")

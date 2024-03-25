@@ -75,4 +75,3 @@ struct MarkedCalendar: View {
         .padding(Sizes.spacing)
     }
 }
-

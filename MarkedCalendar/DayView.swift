@@ -40,16 +40,16 @@ struct DayView: View {
             return Color.gray
         }
     }
-
-    private var fillColor: Color {
-        if !isEnabled {
-            return .gray
-        } else if isSelected {
-            return isToday ? .white : .blue
-        } else {
-            return .blue
-        }
-    }
+//
+//    private var fillColor: Color {
+//        if !isEnabled {
+//            return .gray
+//        } else if isSelected {
+//            return isToday ? .white : .blue
+//        } else {
+//            return .blue
+//        }
+//    }
 
     private var backgroundColor: Color {
         if isSelected {
@@ -64,22 +64,32 @@ struct DayView: View {
     }
 
     var body: some View {
-        VStack(spacing: Constants.Spacing.xxxxsmall) {
+        VStack(spacing: Constants.Spacing.xxxsmall) {
             if let date = date {
                 Text(date.day)
                     .foregroundColor(textColor)
-                    .font(isToday ? .caption.bold() : .caption)
+                    .font(isToday || isSelected ? .caption.bold() : .caption)
+                    .frame(maxWidth: .infinity)
+                    .padding(Constants.Spacing.xxxsmall)
+                    .cornerRadius(4)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(backgroundColor)
+                    )
             }
 
-            if markedDate != nil {
-                Circle()
-                    .fill(fillColor)
-                    .frame(width: Sizes.frameCircle, height: Sizes.frameCircle)
+            if let markedDate = markedDate {
+                markedDate.icon
             }
+
+//            if markedDate != nil {
+//                Circle()
+//                    .fill(fillColor)
+//                    .frame(width: Sizes.frameCircle, height: Sizes.frameCircle)
+//            }
         }
         .frame(maxWidth: .infinity)
-        .frame(height: Constants.Spacing.medium, alignment: .top)
-        .padding(.vertical, Constants.Spacing.xxxsmall)
-        .background(backgroundColor)
+        .frame(height: Constants.Spacing.large, alignment: .top)
+//        .padding(.vertical, Constants.Spacing.xxxsmall)
     }
 }

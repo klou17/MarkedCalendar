@@ -15,7 +15,7 @@ struct MonthView: View {
     }
 
     var body: some View {
-        LazyVGrid(columns: columns, spacing: Constants.Spacing.xxxxsmall) {
+        LazyVGrid(columns: columns, spacing: Constants.Spacing.xxxsmall) {
             ForEach(0..<viewModel.calendarSpacesCount, id: \.self) { index in
                 gridCellView(at: index)
             }

@@ -6,27 +6,24 @@
 //
 
 import Foundation
+import SwiftUI
 
 public struct MarkedDate {
     public let date: Date
-    public let ordersAmount: Int
+    public let icon: AnyView
 
-    public var areManyOrders: Bool {
-        ordersAmount > 3
-    }
-
-    public init(date: Date, ordersAmount: Int) {
+    public init(date: Date, icon: AnyView) {
         self.date = date
-        self.ordersAmount = ordersAmount
+        self.icon = icon
     }
 }
 
 public extension [MarkedDate] {
     static func mockData() -> [MarkedDate] {
         [
-            MarkedDate(date: Date().today, ordersAmount: 4),
-            MarkedDate(date: Date().tomorrow , ordersAmount: 2),
-            MarkedDate(date: Date().add(.day, value: 12) ?? Date(), ordersAmount: 2)
+            MarkedDate(date: Date().today, icon: AnyView(Circle().frame(width: 6, height: 6))),
+            MarkedDate(date: Date().tomorrow, icon: AnyView(Circle().frame(width: 6, height: 6))),
+            MarkedDate(date: Date().add(.day, value: 12) ?? Date(), icon: AnyView(Circle().frame(width: 6, height: 6)))
         ]
     }
 }
