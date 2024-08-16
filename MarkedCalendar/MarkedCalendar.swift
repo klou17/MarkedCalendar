@@ -75,3 +75,62 @@ struct MarkedCalendar: View {
         .padding(Sizes.spacing)
     }
 }
+
+public struct StylesKey: EnvironmentKey {
+    public static var defaultValue: Styles = Styles()
+}
+
+public extension EnvironmentValues {
+    var datePickerTheme: Styles {
+        get { self[StylesKey.self] }
+        set { self[StylesKey.self] = newValue }
+    }
+}
+
+public extension View {
+    func datePickerTheme(_ theme: Styles) -> some View {
+        self.environment(\.datePickerTheme, theme)
+    }
+    
+    func datePickerTheme(
+        main: Styles.Main = .init()
+    ) -> some View {
+        self.environment(\.datePickerTheme, Styles(main: main))
+    }
+}
+
+public struct Styles {
+    public let main: Main
+    
+    public init(main: Styles.Main = .init()) {
+        self.main = main
+    }
+}
+
+
+public extension Styles {
+    struct Main {
+        public let accentColor: Color
+        public let monthTitle: Color
+        public let daysName: Color
+        public let daysNumbers: Color
+        public let previousDaysNumber: Color
+        public let backgroundStyle: BackgroundStyle
+        
+        public init(accentColor: Color = .blue,
+                    monthTitle: Color = Color(UIColor.label),
+                    daysName: Color = .gray,
+                    daysNumbers: Color = Color(UIColor.label),
+                    previousDaysNumber: Color = .gray,
+                    backgroundStyle: BackgroundStyle = .background) {
+            
+            self.accentColor = accentColor
+            self.monthTitle = monthTitle
+            self.daysName = daysName
+            self.daysNumbers = daysNumbers
+            self.previousDaysNumber = previousDaysNumber
+            self.backgroundStyle = backgroundStyle
+            
+        }
+    }
+}
